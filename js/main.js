@@ -284,6 +284,7 @@ function updateBackgroundBasedOnWeather(data) {
 const favouritesList = document.getElementById('favouritesList');
 const saveFavouriteBtn = document.getElementById('saveFavouriteBtn');
 
+//Big help from chatGPT to let me know about localstorage. It saves data in your local storage that is kept with your browser. So for example the favourites do not disappear after closing your webpage.
 let favourites = JSON.parse(localStorage.getItem('favourites')) || [];
 
 function displayFavourites() {

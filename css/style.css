@@ -12,7 +12,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh; 
-    transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out; /*credits to chatGPT for this transition idea. It's simple, but makes the webpage look a lot cleaner.*/
     margin: 0; 
     padding: 0;
     box-sizing: border-box;
@@ -305,7 +305,7 @@ main {
 
 #favouritesList li {
     display: flex;
-    justify-content: space-between;  /* Aligns the location and the button */
+    justify-content: space-between;  
     align-items: center;
     margin-bottom: 10px;
     background-color: #f9f9f9;
@@ -371,3 +371,5 @@ main {
     border-radius: 5px;
     font-size: 20px;
 }
+
+/* CSS was mostly very inspired from other sources such as the 2 youtube videos I mentioned in my documentation PDF.*/
