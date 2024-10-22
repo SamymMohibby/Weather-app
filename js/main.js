@@ -16,7 +16,7 @@ async function showPosition(position) {
     fetchOneCallWeather(lat, lon, cityName);
 }
 
-
+//Some error handling, i thought it would be good practice.
 function showError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
