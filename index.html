@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather application</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/frappe-charts@1.5.1/dist/frappe-charts.min.iife.js"></script>
+</head>
+<body>
+    <header>Weather App</header>
+    
+    <main>
+        <section class="search">
+            <input type="text" id="locationInput" placeholder="Enter location">
+            <button id="searchBtn">Search</button>
+            
+        </section>        
+        <section class="favButton">
+            <div class="weather-info">
+                <button id="saveFavouriteBtn">Save to Favourites</button>
+            </div>
+        </section>
+        <section id="favouritesSection">
+            <h3>Your Favourite Locations</h3>
+            <ul id="favouritesList"></ul> 
+        </section>
+               
+        <div class="unit-toggle">
+            <button id="unitCelsius">°C</button>
+            <button id="unitFahrenheit">°F</button>
+            <button id="unitKelvin">K</button>
+        </div>
+        <section class="weather-info">
+            <h2>Current Weather</h2>
+            <div id="weatherDetails"></div>
+        </section>
+        
+    </main>
+    <div id="chart"></div>
+
+
+    
+</body>
+</html>
