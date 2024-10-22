@@ -43,10 +43,10 @@ async function getCityName(lat, lon) {
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        return data.name;  // This returns the city name
+        return data.name;  
     } catch (error) {
         console.error("Error fetching city name:", error);
-        return "Unknown Location";  // Fallback if something goes wrong
+        return "Unknown Location";  
     }
 }
 
@@ -55,20 +55,20 @@ async function getCityName(lat, lon) {
 function displayWeatherData(data, cityName) {
     const weatherDetails = document.getElementById('weatherDetails');
 
-    // Extract temperature
+    // Extract temp
     let currentTemp = data.current.temp;
     let feelsLike = data.current.feels_like;
 
-    // Convert to Kelvin if needed
+    // Convert to k
     if (selectedUnit === 'kelvin') {
-        currentTemp = currentTemp + 273.15;
-        feelsLike = feelsLike + 273.15;
+        currentTemp = currentTemp;
+        feelsLike = feelsLike;
     }
 
-    // Set unit symbol
+   
     const unitSymbol = selectedUnit === 'metric' ? '°C' : selectedUnit === 'imperial' ? '°F' : 'K';
 
-    // Display the temperature and other details, with the city name
+    // Display the temperature and other details, with the city name etc. https://www.youtube.com/watch?v=krUdJ87uxXc&t=2195s a good guide for this part. It seemed challenging for me.
     weatherDetails.innerHTML = `
     <div id="currentWeather">
         <h2>${cityName}</h2> <!-- Display the city name instead of timezone -->
@@ -91,10 +91,6 @@ function displayWeatherData(data, cityName) {
     </div>
     `;
 }
-
-
-
-
 
 
 document.getElementById('searchBtn').addEventListener('click', function() {
@@ -131,18 +127,19 @@ function fetchOneCallWeather(lat, lon, cityName) {
     const apiKey = 'e18e840785e3e41375da52ea2446649a';  
     const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${selectedUnit}`;
 
+    //this part is for dusplaying the hourly and 7day forecast
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            displayWeatherData(data, cityName);  // Pass the city name to display
-            displayHourlyForecast(data.hourly);  // Display hourly forecast
-            displaySevenDayForecast(data.daily);  // Display 7-day forecast
+            displayWeatherData(data, cityName);  
+            displayHourlyForecast(data.hourly);  
+            displaySevenDayForecast(data.daily);  
             updateBackgroundBasedOnWeather(data);
         })
         .catch(error => console.log("Error fetching One Call weather data:", error));
 }
 
-
+//custom icons from assets folder, credit to: https://www.flaticon.com/free-icons/weather 
 function getCustomIcon(weatherCondition) {
     const weatherIcons = {
         'Clear': 'assets/sunny.png',
@@ -154,7 +151,7 @@ function getCustomIcon(weatherCondition) {
         'Mist': 'assets/mist.png',
     };
 
-    return weatherIcons[weatherCondition] || 'assets/default.png';
+    return weatherIcons[weatherCondition] || 'assets/default.png'; //It ddefaults back to default png(openweathermap) icons
 }
 
 function fetchHourlyForecast(lat, lon) {
@@ -226,17 +223,17 @@ function displaySevenDayForecast(dailyData) {
 
     weatherDetails.innerHTML += forecastHTML;
 }
-let selectedUnit = 'metric'; // Default is Celsius
+let selectedUnit = 'metric'; // Default is celsius
 
 document.getElementById('unitCelsius').addEventListener('click', function() {
     selectedUnit = 'metric';
-    // fetch the weather data with Celsius
+    // fetch it with celisus
     reFetchWeather();
 });
 
 document.getElementById('unitFahrenheit').addEventListener('click', function() {
     selectedUnit = 'imperial';
-    // fetclh the weather data with Fahrenheit
+    // fetclh with Fahrenheit
     reFetchWeather();
 });
 
@@ -249,19 +246,19 @@ function reFetchWeather() {
     const location = document.getElementById('locationInput').value;
 
     if (location) {
-        fetchWeatherByLocation(location); // Re-fetch weather for searched city
+        fetchWeatherByLocation(location); // Refetch weather for searched city
     } else if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError); // Re-fetch for current location
+        navigator.geolocation.getCurrentPosition(showPosition, showError); // Refetch for current location
     }
 }
 
-//I had a huge problem without this, since at nights, the background would always be dark no matter what city i was searching for. It was cuz the program retrieved my local time.
+
 
 function updateBackgroundBasedOnWeather(data) {
-    const currentTemp = data.current.temp;  // Temperature in Celsius or Fahrenheit
+    const currentTemp = data.current.temp;  // Ttemp in c or F
     const body = document.body;
 
-    // Set thresholds based on the selected unit
+    //chatgpt guidede me through this part, it said to use certain thresholds for different weather conditions etc.
     let coldThreshold, hotThreshold;
 
     if (selectedUnit === 'metric') {
@@ -272,7 +269,7 @@ function updateBackgroundBasedOnWeather(data) {
         hotThreshold = 77;   // 77°F for hot
     }
 
-    // Temperature-based background
+
     if (currentTemp < coldThreshold) {
         body.style.backgroundColor = '#4a90e2';  // Blueish for cold
     } else if (currentTemp > hotThreshold) {
@@ -280,6 +277,7 @@ function updateBackgroundBasedOnWeather(data) {
     } else {
         body.style.backgroundColor = '#f4a460';  // Sandy color for moderate
     }
+    //used https://imagecolorpicker.com/ for color pickers
 
 }
 
@@ -338,8 +336,3 @@ window.onload = function() {
     getLocation();
     displayFavourites(); 
 };
-
-
-
-
-
