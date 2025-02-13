@@ -29,7 +29,7 @@ function showError(error) {
             alert("The request to get user location timed out.");
             break;
         case error.UNKNOWN_ERROR:
-            alert("An unknown error occurred.");
+            alert("An unknown error occurred."); 
             break;
     }
 }
@@ -37,7 +37,7 @@ function showError(error) {
 window.onload = getLocation;
 
 async function getCityName(lat, lon) {
-    const apiKey = 'e18e840785e3e41375da52ea2446649a';  
+    const apiKey = ''; //Your own api key  
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
     try {
@@ -103,7 +103,7 @@ document.getElementById('searchBtn').addEventListener('click', function() {
 });
 
 function fetchWeatherByLocation(location) {
-    const apiKey = 'e18e840785e3e41375da52ea2446649a';  
+    const apiKey = '';  //apikey
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
 
     fetch(apiUrl)
@@ -124,7 +124,7 @@ function fetchWeatherByLocation(location) {
 
 
 function fetchOneCallWeather(lat, lon, cityName) {
-    const apiKey = 'e18e840785e3e41375da52ea2446649a';  
+    const apiKey = '';  //your own apikey
     const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${selectedUnit}`;
 
     //this part is for dusplaying the hourly and 7day forecast
@@ -155,7 +155,7 @@ function getCustomIcon(weatherCondition) {
 }
 
 function fetchHourlyForecast(lat, lon) {
-    const apiKey = 'e18e840785e3e41375da52ea2446649a'; 
+    const apiKey = ''; //your own api key
     const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
     fetch(apiUrl)
